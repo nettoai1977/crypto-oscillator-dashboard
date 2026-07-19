@@ -536,6 +536,85 @@ tr:hover {
     color: var(--text-secondary);
 }
 
+/* TBO Indicator */
+.tbo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tbo-coin {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.tbo-coin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+.tbo-coin-header h3 {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.tbo-verdict {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.tbo-timeframes {
+    font-size: 0.8rem;
+}
+
+.tbo-tf-header {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr 80px 120px 60px;
+    gap: 8px;
+    padding: 6px 0;
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+}
+
+.tbo-tf-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr 80px 120px 60px;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.tbo-tf-row:last-child {
+    border-bottom: none;
+}
+
+.tbo-tf-label {
+    font-weight: 500;
+}
+
+.tbo-trend-change {
+    background: rgba(210, 153, 34, 0.1);
+    border-radius: 4px;
+}
+
+.tbo-alert {
+    padding: 6px 10px;
+    background: var(--orange-bg);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: var(--orange);
+    margin-top: 8px;
+}
+
 /* Footer */
 .footer {
     text-align: center;

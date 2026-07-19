@@ -242,6 +242,17 @@ function toggleTierF() {
     el.style.display = el.style.display === 'none' ? 'block' : 'none';
 }
 
+// Fear & Greed Index
+async function fetchFearGreed() {
+    try {
+        const r = await fetch('https://api.alternative.me/fng/?limit=1');
+        const data = await r.json();
+        return data.data[0];
+    } catch (e) {
+        return null;
+    }
+}
+
 // Main refresh
 async function refreshAll() {
     document.getElementById('lastUpdated').textContent = 'Refreshing...';
@@ -292,6 +303,25 @@ async function refreshAll() {
     } else {
         marketStatus.textContent = '🔴 HIGH';
         marketDetail.textContent = 'Few coins at entry — wait';
+    }
+
+    // Fetch Fear & Greed
+    const fng = await fetchFearGreed();
+    if (fng) {
+        const fngValue = parseInt(fng.value);
+        const fngEl = document.getElementById('fngValue');
+        const fngDetail = document.getElementById('fngDetail');
+        if (fngEl) {
+            fngEl.textContent = `${fng.value} — ${fng.value_classification}`;
+            fngEl.className = `card-value ${fngValue < 30 ? 'price-down' : fngValue > 70 ? 'price-up' : ''}`;
+        }
+        if (fngDetail) {
+            fngDetail.textContent = fngValue <= 25 ? '🟢 Extreme Fear — potential buy zone' :
+                fngValue <= 45 ? '🟡 Fear — cautious' :
+                fngValue <= 55 ? '⚪ Neutral' :
+                fngValue <= 75 ? '🟡 Greed — cautious' :
+                '🔴 Extreme Greed — potential sell zone';
+        }
     }
 
     // Render everything

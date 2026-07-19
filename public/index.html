@@ -25,6 +25,7 @@
         <nav class="tabs">
             <button class="tab active" onclick="switchTab('dashboard')">📊 Dashboard</button>
             <button class="tab" onclick="switchTab('calendar')">📅 Calendar</button>
+            <button class="tab" onclick="switchTab('tbo')">📈 TBO Trend</button>
         </nav>
 
         <!-- DASHBOARD TAB -->
@@ -41,14 +42,14 @@
                     <div class="card-detail" id="btcChange">--</div>
                 </div>
                 <div class="card card-purple">
+                    <div class="card-label">Fear & Greed Index</div>
+                    <div class="card-value" id="fngValue">--</div>
+                    <div class="card-detail" id="fngDetail">Loading...</div>
+                </div>
+                <div class="card card-orange">
                     <div class="card-label">Portfolio Entry Zones</div>
                     <div class="card-value" id="entryCount">--</div>
                     <div class="card-detail" id="entryDetail">of 7 coins</div>
-                </div>
-                <div class="card card-orange">
-                    <div class="card-label">Active Signals</div>
-                    <div class="card-value" id="signalCount">--</div>
-                    <div class="card-detail" id="signalDetail">--</div>
                 </div>
             </section>
 
@@ -117,6 +118,15 @@
             </section>
         </div>
 
+        <!-- TBO TAB -->
+        <div id="tab-tbo" class="tab-content" style="display:none">
+            <section class="panel">
+                <h2>📈 TBO Trend Indicator — Multi-Timeframe</h2>
+                <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:16px">Cloud-based trend detection across Weekly, Daily, 4H, 1H timeframes. Green = above cloud, Red = below cloud.</p>
+                <div id="tboContent" class="tbo-container"><div class="loading">Loading...</div></div>
+            </section>
+        </div>
+
         <footer class="footer">
             <p>Data: Binance API (live) | Tiers: VirtualBacon (April 2026) | Built: July 19, 2026</p>
             <p>⚠️ Not financial advice. DYOR.</p>
@@ -125,6 +135,7 @@
 
     <script src="app.js"></script>
     <script src="calendar.js"></script>
+    <script src="tbo.js"></script>
     <script>
         function switchTab(name) {
             document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
@@ -132,6 +143,7 @@
             document.getElementById('tab-' + name).style.display = 'block';
             event.target.classList.add('active');
             if (name === 'calendar') initCalendar();
+            if (name === 'tbo') initTbo();
         }
     </script>
 </body>
