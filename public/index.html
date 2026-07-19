@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Oscillator Dashboard — VirtualBacon Thesis</title>
+    <title>Crypto Oscillator Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="app">
-        <!-- Header -->
         <header class="header">
             <div class="header-left">
                 <h1>🪙 Crypto Oscillator Dashboard</h1>
@@ -22,173 +21,118 @@
             </div>
         </header>
 
-        <!-- Summary Cards -->
-        <section class="summary-cards">
-            <div class="card card-green">
-                <div class="card-label">Market Status</div>
-                <div class="card-value" id="marketStatus">--</div>
-                <div class="card-detail" id="marketDetail">Loading...</div>
-            </div>
-            <div class="card card-blue">
-                <div class="card-label">BTC Price</div>
-                <div class="card-value" id="btcPrice">--</div>
-                <div class="card-detail" id="btcChange">--</div>
-            </div>
-            <div class="card card-purple">
-                <div class="card-label">Portfolio Entry Zones</div>
-                <div class="card-value" id="entryCount">--</div>
-                <div class="card-detail" id="entryDetail">of 7 coins</div>
-            </div>
-            <div class="card card-orange">
-                <div class="card-label">Active Signals</div>
-                <div class="card-value" id="signalCount">--</div>
-                <div class="card-detail" id="signalDetail">--</div>
-            </div>
-        </section>
+        <!-- Tabs -->
+        <nav class="tabs">
+            <button class="tab active" onclick="switchTab('dashboard')">📊 Dashboard</button>
+            <button class="tab" onclick="switchTab('calendar')">📅 Calendar</button>
+        </nav>
 
-        <!-- Main Grid -->
-        <div class="main-grid">
-            <!-- Portfolio Table -->
-            <section class="panel portfolio-panel">
-                <h2>💰 Portfolio Tracker</h2>
-                <div class="table-container">
-                    <table id="portfolioTable">
-                        <thead>
-                            <tr>
-                                <th>Coin</th>
-                                <th>Tier</th>
-                                <th>Price</th>
-                                <th>24h %</th>
-                                <th>RSI</th>
-                                <th>Entry Zone</th>
-                                <th>Status</th>
-                                <th>Alloc</th>
-                            </tr>
-                        </thead>
-                        <tbody id="portfolioBody">
-                            <tr><td colspan="8" class="loading">Loading...</td></tr>
-                        </tbody>
-                    </table>
+        <!-- DASHBOARD TAB -->
+        <div id="tab-dashboard" class="tab-content active">
+            <section class="summary-cards">
+                <div class="card card-green">
+                    <div class="card-label">Market Status</div>
+                    <div class="card-value" id="marketStatus">--</div>
+                    <div class="card-detail" id="marketDetail">Loading...</div>
+                </div>
+                <div class="card card-blue">
+                    <div class="card-label">BTC Price</div>
+                    <div class="card-value" id="btcPrice">--</div>
+                    <div class="card-detail" id="btcChange">--</div>
+                </div>
+                <div class="card card-purple">
+                    <div class="card-label">Portfolio Entry Zones</div>
+                    <div class="card-value" id="entryCount">--</div>
+                    <div class="card-detail" id="entryDetail">of 7 coins</div>
+                </div>
+                <div class="card card-orange">
+                    <div class="card-label">Active Signals</div>
+                    <div class="card-value" id="signalCount">--</div>
+                    <div class="card-detail" id="signalDetail">--</div>
                 </div>
             </section>
 
-            <!-- ALT/BTC Ratios -->
-            <section class="panel altrbtc-panel">
-                <h2>📈 ALT/BTC Ratios</h2>
-                <div class="table-container">
-                    <table id="altrbtcTable">
-                        <thead>
-                            <tr>
-                                <th>Pair</th>
-                                <th>Ratio</th>
-                                <th>24h %</th>
-                                <th>Trend</th>
-                                <th>Signal</th>
-                            </tr>
-                        </thead>
-                        <tbody id="altrbtcBody">
-                            <tr><td colspan="5" class="loading">Loading...</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-        </div>
+            <div class="main-grid">
+                <section class="panel portfolio-panel">
+                    <h2>💰 Portfolio Tracker</h2>
+                    <div class="table-container">
+                        <table id="portfolioTable">
+                            <thead><tr><th>Coin</th><th>Tier</th><th>Price</th><th>24h %</th><th>RSI</th><th>Entry Zone</th><th>Status</th><th>Alloc</th></tr></thead>
+                            <tbody id="portfolioBody"><tr><td colspan="8" class="loading">Loading...</td></tr></tbody>
+                        </table>
+                    </div>
+                </section>
+                <section class="panel altrbtc-panel">
+                    <h2>📈 ALT/BTC Ratios</h2>
+                    <div class="table-container">
+                        <table id="altrbtcTable">
+                            <thead><tr><th>Pair</th><th>Ratio</th><th>24h %</th><th>Trend</th><th>Signal</th></tr></thead>
+                            <tbody id="altrbtcBody"><tr><td colspan="5" class="loading">Loading...</td></tr></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
 
-        <!-- Second Row -->
-        <div class="main-grid">
-            <!-- Sector Correlation -->
-            <section class="panel sector-panel">
-                <h2>🔗 Sector Correlation</h2>
-                <div id="sectorContent" class="sector-grid">
-                    <div class="loading">Loading...</div>
-                </div>
-            </section>
+            <div class="main-grid">
+                <section class="panel sector-panel">
+                    <h2>🔗 Sector Correlation</h2>
+                    <div id="sectorContent" class="sector-grid"><div class="loading">Loading...</div></div>
+                </section>
+                <section class="panel plan-panel">
+                    <h2>📋 Trading Plan</h2>
+                    <div class="plan-content">
+                        <div class="plan-section"><h3>Core (60%)</h3>
+                            <div class="plan-item"><span class="plan-coin">FET</span><span class="plan-alloc">25%</span><span class="plan-entry">$0.156 — $0.172</span></div>
+                            <div class="plan-item"><span class="plan-coin">SOL</span><span class="plan-alloc">20%</span><span class="plan-entry">$74.50 — $81.95</span></div>
+                            <div class="plan-item"><span class="plan-coin">RENDER</span><span class="plan-alloc">15%</span><span class="plan-entry">$1.46 — $1.60</span></div>
+                        </div>
+                        <div class="plan-section"><h3>Tactical (25%)</h3>
+                            <div class="plan-item"><span class="plan-coin">XRP</span><span class="plan-alloc">15%</span><span class="plan-entry">$1.08 — $1.19</span></div>
+                            <div class="plan-item"><span class="plan-coin">BNB</span><span class="plan-alloc">10%</span><span class="plan-entry">$566 — $623</span></div>
+                        </div>
+                        <div class="plan-section"><h3>Speculative (15%)</h3>
+                            <div class="plan-item"><span class="plan-coin">ONDO</span><span class="plan-alloc">10%</span><span class="plan-entry">$0.30 — $0.38</span></div>
+                            <div class="plan-item"><span class="plan-coin">INJ</span><span class="plan-alloc">5%</span><span class="plan-entry">Contrarian</span></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
 
-            <!-- Trading Plan -->
-            <section class="panel plan-panel">
-                <h2>📋 Trading Plan</h2>
-                <div class="plan-content">
-                    <div class="plan-section">
-                        <h3>Core (60%)</h3>
-                        <div class="plan-item">
-                            <span class="plan-coin">FET</span>
-                            <span class="plan-alloc">25%</span>
-                            <span class="plan-entry">$0.156 — $0.172</span>
-                        </div>
-                        <div class="plan-item">
-                            <span class="plan-coin">SOL</span>
-                            <span class="plan-alloc">20%</span>
-                            <span class="plan-entry">$74.50 — $81.95</span>
-                        </div>
-                        <div class="plan-item">
-                            <span class="plan-coin">RENDER</span>
-                            <span class="plan-alloc">15%</span>
-                            <span class="plan-entry">$1.46 — $1.60</span>
-                        </div>
-                    </div>
-                    <div class="plan-section">
-                        <h3>Tactical (25%)</h3>
-                        <div class="plan-item">
-                            <span class="plan-coin">XRP</span>
-                            <span class="plan-alloc">15%</span>
-                            <span class="plan-entry">$1.08 — $1.19</span>
-                        </div>
-                        <div class="plan-item">
-                            <span class="plan-coin">BNB</span>
-                            <span class="plan-alloc">10%</span>
-                            <span class="plan-entry">$566 — $623</span>
-                        </div>
-                    </div>
-                    <div class="plan-section">
-                        <h3>Speculative (15%)</h3>
-                        <div class="plan-item">
-                            <span class="plan-coin">ONDO</span>
-                            <span class="plan-alloc">10%</span>
-                            <span class="plan-entry">$0.30 — $0.38</span>
-                        </div>
-                        <div class="plan-item">
-                            <span class="plan-coin">INJ</span>
-                            <span class="plan-alloc">5%</span>
-                            <span class="plan-entry">Contrarian</span>
-                        </div>
-                    </div>
+            <section class="panel tier-panel">
+                <h2>🏆 VirtualBacon Tier List</h2>
+                <div class="tier-grid">
+                    <div class="tier-column tier-s"><h3>S Tier — Outperformed BTC</h3><div id="tierS" class="tier-coins">Loading...</div></div>
+                    <div class="tier-column tier-a"><h3>A Tier — Strong Oscillators</h3><div id="tierA" class="tier-coins">Loading...</div></div>
+                    <div class="tier-column tier-b"><h3>B Tier — Weaker Oscillators</h3><div id="tierB" class="tier-coins">Loading...</div></div>
+                    <div class="tier-column tier-f"><h3>F Tier — Avoid (78%)</h3><div class="tier-coins collapsed" id="tierF"><div class="tier-summary">54 coins — <button onclick="toggleTierF()" class="btn-link">Show/Hide</button></div><div class="tier-full" id="tierFFull" style="display:none"></div></div></div>
                 </div>
             </section>
         </div>
 
-        <!-- Tier List -->
-        <section class="panel tier-panel">
-            <h2>🏆 VirtualBacon Tier List</h2>
-            <div class="tier-grid">
-                <div class="tier-column tier-s">
-                    <h3>S Tier — Outperformed BTC</h3>
-                    <div id="tierS" class="tier-coins">Loading...</div>
-                </div>
-                <div class="tier-column tier-a">
-                    <h3>A Tier — Strong Oscillators</h3>
-                    <div id="tierA" class="tier-coins">Loading...</div>
-                </div>
-                <div class="tier-column tier-b">
-                    <h3>B Tier — Weaker Oscillators</h3>
-                    <div id="tierB" class="tier-coins">Loading...</div>
-                </div>
-                <div class="tier-column tier-f">
-                    <h3>F Tier — Avoid (78%)</h3>
-                    <div class="tier-coins collapsed" id="tierF">
-                        <div class="tier-summary">54 coins — <button onclick="toggleTierF()" class="btn-link">Show/Hide</button></div>
-                        <div class="tier-full" id="tierFFull" style="display:none"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- CALENDAR TAB -->
+        <div id="tab-calendar" class="tab-content" style="display:none">
+            <section class="panel">
+                <h2>📅 Crypto Calendar — Historical Monthly Performance</h2>
+                <div id="calendarContent" class="calendar-container"><div class="loading">Loading...</div></div>
+            </section>
+        </div>
 
-        <!-- Footer -->
         <footer class="footer">
             <p>Data: Binance API (live) | Tiers: VirtualBacon (April 2026) | Built: July 19, 2026</p>
-            <p>⚠️ Not financial advice. DYOR. This is a research tool, not a trading recommendation.</p>
+            <p>⚠️ Not financial advice. DYOR.</p>
         </footer>
     </div>
 
     <script src="app.js"></script>
+    <script src="calendar.js"></script>
+    <script>
+        function switchTab(name) {
+            document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+            document.getElementById('tab-' + name).style.display = 'block';
+            event.target.classList.add('active');
+            if (name === 'calendar') initCalendar();
+        }
+    </script>
 </body>
 </html>
